@@ -1,0 +1,1081 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Création et refonte de sites internet modernes, élégants et adaptés aux mobiles.">
+  <meta name="theme-color" content="#f4f1ea">
+  <title>Studio Web — Création de sites internet</title>
+
+  <style>
+    :root {
+      --bg: #f4f1ea;
+      --paper: #fffdfa;
+      --ink: #16201d;
+      --muted: #69736f;
+      --line: #dedfd7;
+      --green: #1d6550;
+      --green-dark: #164936;
+      --orange: #e46f51;
+      --soft-green: #dfe9df;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 64px));
+      margin: auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(244,241,234,.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      text-transform: uppercase;
+    }
+
+    .brandmark {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--ink);
+      display: grid;
+      place-items: center;
+      color: var(--paper);
+      font-weight: 900;
+      font-family: Georgia, serif;
+      font-size: 18px;
+    }
+
+    .links {
+      display: flex;
+      gap: 34px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .links a {
+      position: relative;
+      transition: color .2s ease;
+    }
+
+    .links a:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: -8px;
+      height: 2px;
+      background: var(--orange);
+      transition: right .2s ease;
+    }
+
+    .links a:hover { color: var(--ink); }
+    .links a:hover:after { right: 0; }
+
+    .navcta, .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      padding: 13px 18px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .navcta, .primary {
+      background: var(--green);
+      color: white;
+      border: 1px solid var(--green);
+    }
+
+    .navcta:hover, .primary:hover {
+      background: var(--green-dark);
+      border-color: var(--green-dark);
+      transform: translateY(-2px);
+    }
+
+    .secondary {
+      border: 1px solid var(--line);
+      color: var(--ink);
+      background: rgba(255,255,255,.45);
+    }
+
+    .secondary:hover { border-color: var(--ink); background: var(--paper); }
+
+    .menu {
+      display: none;
+      background: none;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 8px 11px;
+      font-size: 20px;
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 660px;
+      display: flex;
+      align-items: center;
+      padding: 92px 0 100px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 9px;
+      align-items: center;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow:before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      background: var(--orange);
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(52px,7vw,88px);
+      line-height: .98;
+      letter-spacing: -.055em;
+      max-width: 760px;
+      margin: 26px 0 28px;
+      font-weight: 700;
+    }
+
+    .gradient {
+      color: var(--green);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .lead {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 610px;
+      line-height: 1.65;
+    }
+
+    .actions {
+      display: flex;
+      gap: 13px;
+      flex-wrap: wrap;
+      margin-top: 34px;
+    }
+
+    .hero-note {
+      margin-top: 45px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .hero-visual {
+      position: absolute;
+      right: -70px;
+      top: 142px;
+      width: 380px;
+      height: 420px;
+      border: 1px solid #cfd3c7;
+      border-radius: 180px 180px 12px 12px;
+      transform: rotate(5deg);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.65)),
+        var(--soft-green);
+      box-shadow: 24px 28px 0 rgba(29,101,80,.08);
+      padding: 34px 26px 26px;
+    }
+
+    .mock-top {
+      height: 24px;
+      display: flex;
+      gap: 6px;
+      border-bottom: 1px solid rgba(22,32,29,.12);
+      padding-bottom: 12px;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .mock-content { padding: 44px 12px 20px; }
+
+    .mock-line {
+      height: 9px;
+      background: rgba(29,101,80,.35);
+      border-radius: 2px;
+      margin: 14px 0;
+      width: 70%;
+    }
+
+    .mock-line.big {
+      height: 28px;
+      width: 86%;
+      background: var(--ink);
+    }
+
+    .mock-card {
+      margin-top: 34px;
+      height: 170px;
+      border-radius: 90px 90px 8px 8px;
+      background:
+        radial-gradient(circle at 65% 30%, rgba(228,111,81,.9) 0 7%, transparent 8%),
+        linear-gradient(145deg, #98af9f, #4d7564);
+      border: 10px solid rgba(255,255,255,.55);
+    }
+
+    /* SECTIONS */
+
+    section { padding: 104px 0; }
+
+    .section-head {
+      max-width: 680px;
+      margin-bottom: 46px;
+    }
+
+    .kicker {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .section-head h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(38px,5vw,58px);
+      letter-spacing: -.045em;
+      line-height: 1.04;
+      margin: 14px 0 18px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      margin: 0;
+      max-width: 620px;
+    }
+
+    .grid3 {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    .card {
+      background: var(--paper);
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 38px 32px 34px;
+      min-height: 280px;
+      transition: transform .25s ease, background .25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      background: #fff;
+    }
+
+    .icon {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--green);
+      background: var(--soft-green);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--green);
+      font-size: 18px;
+    }
+
+    .card h3 {
+      margin: 48px 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 22px;
+      letter-spacing: -.025em;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* APPROCHE */
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .feature-panel {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 18px 32px;
+      box-shadow: 18px 18px 0 var(--soft-green);
+    }
+
+    .feature-row {
+      display: flex;
+      gap: 16px;
+      padding: 21px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .feature-row:last-child { border: 0; }
+
+    .check {
+      flex: 0 0 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--green);
+      color: white;
+      font-weight: 900;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+    }
+
+    .feature-row strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .feature-row span {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* REALISATIONS */
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 24px;
+    }
+
+    .work {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      overflow: hidden;
+    }
+
+    .work-art {
+      height: 260px;
+      padding: 30px;
+      display: flex;
+      align-items: end;
+      background:
+        radial-gradient(circle at 78% 20%,#e7c99d,transparent 34%),
+        linear-gradient(135deg,#8ca58f,#2e5142);
+    }
+
+    .work:nth-child(2) .work-art {
+      background:
+        radial-gradient(circle at 24% 18%,#e7aa83,transparent 34%),
+        linear-gradient(135deg,#c36d50,#683e35);
+    }
+
+    .work:nth-child(3) .work-art {
+      background:
+        radial-gradient(circle at 70% 18%,#adc4a7,transparent 38%),
+        linear-gradient(135deg,#617f65,#263d31);
+    }
+
+    .work:nth-child(4) .work-art {
+      background:
+        radial-gradient(circle at 32% 20%,#c9b7d2,transparent 38%),
+        linear-gradient(135deg,#7c7187,#363347);
+    }
+
+    .art-window {
+      width: 100%;
+      height: 150px;
+      border: 1px solid rgba(255,255,255,.6);
+      background: rgba(255,253,250,.88);
+      backdrop-filter: blur(8px);
+      padding: 22px;
+      box-shadow: 10px 10px 0 rgba(22,32,29,.12);
+    }
+
+    .art-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -.04em;
+      color: var(--ink);
+    }
+
+    .art-sub {
+      margin-top: 5px;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .09em;
+    }
+
+    .work-info { padding: 24px 26px 26px; }
+
+    .work-info h3 {
+      margin: 0 0 7px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 21px;
+    }
+
+    .work-info p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 16px;
+      color: var(--green);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    /* ETAPES */
+
+    .process {
+      counter-reset: step;
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 0;
+      border-left: 1px solid var(--line);
+    }
+
+    .step {
+      min-height: 210px;
+      padding: 30px 24px;
+      border-top: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.28);
+    }
+
+    .step:before {
+      counter-increment: step;
+      content: "0" counter(step);
+      color: var(--orange);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: .12em;
+    }
+
+    .step h3 {
+      margin: 48px 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 20px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* CONTACT */
+
+    .cta {
+      border: 1px solid var(--green-dark);
+      padding: 58px;
+      background: var(--green);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta:after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -120px;
+      bottom: -170px;
+      border: 32px solid rgba(255,255,255,.09);
+      border-radius: 50%;
+    }
+
+    .cta h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(38px,5vw,58px);
+      letter-spacing: -.05em;
+      line-height: 1;
+      margin: 12px 0 16px;
+    }
+
+    .cta p {
+      color: rgba(255,255,255,.76);
+      max-width: 600px;
+      margin: 0;
+    }
+
+    .cta .kicker { color: #e7bca9; }
+
+    .cta .primary {
+      position: relative;
+      z-index: 1;
+      flex: 0 0 auto;
+      background: var(--paper);
+      color: var(--ink);
+      border-color: var(--paper);
+    }
+
+    .cta .primary:hover {
+      background: #fff;
+      border-color: #fff;
+    }
+
+    footer {
+      padding: 38px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:1100px) {
+      .hero-visual { right: -210px; opacity: .28; }
+      h1 { max-width: 700px; }
+    }
+
+    @media(max-width:850px) {
+      .hero-visual { right: -250px; opacity: .18; }
+      .grid3 { grid-template-columns: 1fr; }
+      .split { grid-template-columns: 1fr; gap: 30px; }
+      .process { grid-template-columns: repeat(2,1fr); }
+      .process { border-top: 0; }
+    }
+
+    @media(max-width:620px) {
+      .wrap { width: min(var(--max),calc(100% - 36px)); }
+      nav { height: 70px; }
+      .brand { font-size: 12px; }
+      .brandmark { width: 34px; height: 34px; }
+
+      .links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        padding: 18px 22px;
+        background: var(--paper);
+        border-bottom: 1px solid var(--line);
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .links.open { display: flex; }
+      .navcta { display: none; }
+      .menu { display: block; }
+
+      .hero { padding: 82px 0 65px; }
+      .hero-visual { display: none; }
+      .lead { font-size: 16px; }
+      section { padding: 62px 0; }
+      .work-grid { grid-template-columns: 1fr; }
+      .process { grid-template-columns: 1fr 1fr; }
+      .cta { padding: 30px; display: block; }
+      .cta .btn { margin-top: 23px; }
+      .foot { display: block; }
+      .foot span { display: block; margin: 8px 0; }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <nav aria-label="Navigation principale">
+
+      <a class="brand" href="#accueil">
+        <span class="brandmark">S</span>
+        <span>[TON NOM / STUDIO]</span>
+      </a>
+
+      <div class="links" id="navlinks">
+        <a href="#services">Services</a>
+        <a href="#approche">Approche</a>
+        <a href="#realisations">Réalisations</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <a class="navcta" href="#contact">
+        Parlons de votre projet ↗
+      </a>
+
+      <button class="menu" id="menu"
+        aria-label="Ouvrir le menu"
+        aria-expanded="false">☰</button>
+
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ACCUEIL -->
+
+  <section class="hero" id="accueil">
+    <div class="wrap">
+
+      <div class="eyebrow">
+        Création · Refonte · Accompagnement
+      </div>
+
+      <h1>
+        Votre activité mérite un site à sa
+        <span class="gradient">hauteur.</span>
+      </h1>
+
+      <p class="lead">
+        Je conçois des sites internet modernes, élégants et faciles
+        à utiliser pour aider les indépendants et les petites
+        entreprises à présenter leur savoir-faire et à développer
+        leur présence en ligne.
+      </p>
+
+      <div class="actions">
+        <a class="btn primary" href="#contact">
+          Discutons de votre projet ↗
+        </a>
+
+        <a class="btn secondary" href="#services">
+          Découvrir mes services
+        </a>
+      </div>
+
+      <p class="hero-note">
+        Des sites pensés pour vos clients, sur ordinateur
+        comme sur mobile.
+      </p>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="mock-top">
+          <i class="dot"></i>
+          <i class="dot"></i>
+          <i class="dot"></i>
+        </div>
+
+        <div class="mock-content">
+          <div class="mock-line big"></div>
+          <div class="mock-line"></div>
+          <div class="mock-line" style="width:48%"></div>
+          <div class="mock-card"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+
+  <section id="services">
+    <div class="wrap">
+
+      <div class="section-head">
+        <div class="kicker">Ce que je propose</div>
+
+        <h2>
+          Un site utile, pas seulement esthétique.
+        </h2>
+
+        <p>
+          Chaque projet part de vos besoins et de ceux de vos clients.
+          L'objectif : rendre votre activité claire, crédible et
+          facile à découvrir.
+        </p>
+      </div>
+
+      <div class="grid3">
+
+        <article class="card">
+          <div class="icon">✦</div>
+          <h3>Création de site vitrine</h3>
+          <p>
+            Présentez votre entreprise, vos prestations et vos
+            coordonnées avec un site professionnel qui inspire confiance.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="icon">↗</div>
+          <h3>Refonte de site existant</h3>
+          <p>
+            Modernisez votre image, simplifiez la navigation et
+            donnez une nouvelle place à vos réalisations et à vos services.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="icon">▣</div>
+          <h3>Adaptation mobile</h3>
+          <p>
+            Offrez une expérience confortable sur smartphone,
+            tablette et ordinateur, avec une mise en page adaptée
+            à chaque écran.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROCHE -->
+
+  <section id="approche">
+    <div class="wrap split">
+
+      <div>
+        <div class="kicker">Une approche simple</div>
+
+        <div class="section-head">
+          <h2>
+            Un accompagnement clair, de l'idée à la mise en ligne.
+          </h2>
+
+          <p>
+            Vous connaissez votre métier. Je vous aide à le présenter
+            en ligne avec une solution adaptée à votre activité,
+            votre budget et vos priorités.
+          </p>
+        </div>
+
+        <a class="btn secondary" href="#contact">
+          Échanger sur vos besoins ↗
+        </a>
+      </div>
+
+      <div class="feature-panel">
+
+        <div class="feature-row">
+          <div class="check">✓</div>
+          <div>
+            <strong>Design soigné</strong>
+            <span>
+              Une identité visuelle cohérente avec votre entreprise.
+            </span>
+          </div>
+        </div>
+
+        <div class="feature-row">
+          <div class="check">✓</div>
+          <div>
+            <strong>Navigation intuitive</strong>
+            <span>
+              Les informations importantes restent faciles à trouver.
+            </span>
+          </div>
+        </div>
+
+        <div class="feature-row">
+          <div class="check">✓</div>
+          <div>
+            <strong>Conception responsive</strong>
+            <span>
+              Un affichage adapté aux mobiles et aux grands écrans.
+            </span>
+          </div>
+        </div>
+
+        <div class="feature-row">
+          <div class="check">✓</div>
+          <div>
+            <strong>Échanges personnalisés</strong>
+            <span>
+              Un projet construit avec vous, étape par étape.
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- REALISATIONS -->
+
+  <section id="realisations">
+    <div class="wrap">
+
+      <div class="section-head">
+        <div class="kicker">Exemples de direction artistique</div>
+
+        <h2>
+          Des univers conçus pour mettre chaque activité en valeur.
+        </h2>
+
+        <p>
+          Ces aperçus sont des concepts de démonstration,
+          pas des sites réalisés pour de vrais clients.
+        </p>
+      </div>
+
+      <div class="work-grid">
+
+        <article class="work">
+          <div class="work-art">
+            <div class="art-window">
+              <div class="art-title">Atelier Nord</div>
+              <div class="art-sub">L'art du mobilier sur mesure</div>
+            </div>
+          </div>
+
+          <div class="work-info">
+            <h3>Artisanat & mobilier</h3>
+            <p>
+              Un univers sobre pour valoriser les matières
+              et les réalisations.
+            </p>
+            <span class="tag">Concept de démonstration</span>
+          </div>
+        </article>
+
+        <article class="work">
+          <div class="work-art">
+            <div class="art-window">
+              <div class="art-title">Maison Épure</div>
+              <div class="art-sub">Des objets choisis avec soin</div>
+            </div>
+          </div>
+
+          <div class="work-info">
+            <h3>Décoration & boutique</h3>
+            <p>
+              Une présentation éditoriale et élégante des produits.
+            </p>
+            <span class="tag">Concept de démonstration</span>
+          </div>
+        </article>
+
+        <article class="work">
+          <div class="work-art">
+            <div class="art-window">
+              <div class="art-title">Vert Demain</div>
+              <div class="art-sub">Le jardin pensé autrement</div>
+            </div>
+          </div>
+
+          <div class="work-info">
+            <h3>Services & savoir-faire</h3>
+            <p>
+              Une page claire pour expliquer les prestations
+              et faciliter le contact.
+            </p>
+            <span class="tag">Concept de démonstration</span>
+          </div>
+        </article>
+
+        <article class="work">
+          <div class="work-art">
+            <div class="art-window">
+              <div class="art-title">Studio Forma</div>
+              <div class="art-sub">Créer des espaces singuliers</div>
+            </div>
+          </div>
+
+          <div class="work-info">
+            <h3>Création & portfolio</h3>
+            <p>
+              Une mise en avant visuelle des projets
+              et de la démarche créative.
+            </p>
+            <span class="tag">Concept de démonstration</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ETAPES -->
+
+  <section>
+    <div class="wrap">
+
+      <div class="section-head">
+        <div class="kicker">Comment ça se passe</div>
+        <h2>Quatre étapes, sans complexité.</h2>
+      </div>
+
+      <div class="process">
+
+        <div class="step">
+          <h3>On échange</h3>
+          <p>
+            Nous faisons le point sur votre activité,
+            vos objectifs et vos attentes.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Je vous propose</h3>
+          <p>
+            Vous recevez une proposition adaptée au contenu
+            et aux fonctionnalités nécessaires.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Nous construisons</h3>
+          <p>
+            Le site prend forme avec vos retours à chaque
+            étape importante.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Nous publions</h3>
+          <p>
+            Après validation, votre site est prêt
+            à être consulté en ligne.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+
+  <section id="contact">
+    <div class="wrap">
+
+      <div class="cta">
+
+        <div>
+          <div class="kicker">Un projet en tête ?</div>
+
+          <h2>Faisons connaissance.</h2>
+
+          <p>
+            Vous souhaitez créer un site ou donner un nouveau
+            souffle à celui que vous avez déjà ?
+            Présentez-moi votre activité et vos besoins.
+            Je vous répondrai pour en discuter.
+          </p>
+        </div>
+
+        <a class="btn primary"
+           href="mailto:[clement.lachkar75@gmail.com]?subject=Parlons%20de%20mon%20site%20internet">
+          Me contacter ↗
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="wrap foot">
+    <strong>[TON NOM / STUDIO]</strong>
+    <span>Création et refonte de sites internet</span>
+    <span>
+      © <span id="year"></span> — Tous droits réservés
+    </span>
+  </div>
+</footer>
+
+<script>
+  const menu = document.getElementById('menu');
+  const links = document.getElementById('navlinks');
+
+  menu.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+
+    menu.setAttribute('aria-expanded', String(open));
+    menu.textContent = open ? '×' : '☰';
+  });
+
+  links.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      links.classList.remove('open');
+      menu.setAttribute('aria-expanded', 'false');
+      menu.textContent = '☰';
+    });
+  });
+
+  document.getElementById('year').textContent =
+    new Date().getFullYear();
+</script>
+
+</body>
+</html>
